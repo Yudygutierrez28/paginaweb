@@ -6,33 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('apadrinacions', function (Blueprint $table) {
+        Schema::create('adoptantes', function (Blueprint $table) {
             $table->id();
-        $table->string('nombre');
-        $table->string('cedula');
-        $table->string('telefono');
-        $table->string('direccion');
-        $table->foreignId('mascota_id')->constrained('mascotas');
-        $table->decimal('monto', 8, 2);
-        $table->string('tiempo_consignacion'); // Mensual, Trimestral, etc.
-        $table->timestamps();
+            $table->string('nombre');
+            $table->string('correo')->unique();
+            $table->string('cedula')->unique();
+            $table->string('telefono');
+            $table->string('direccion');
+            $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('apadrinacions');
+        Schema::dropIfExists('adoptantes');
     }
 };

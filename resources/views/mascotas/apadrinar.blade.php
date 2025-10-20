@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="bg-white rounded-xl shadow p-6">
-        <form action="{{ route('apadrinar.store') }}" method="POST" class="space-y-4">
+        <form action="{{ route('apadrinacion.store') }}" method="POST" class="space-y-4">
             @csrf
             <input type="hidden" name="mascota_id" value="{{ $mascota->id }}">
 

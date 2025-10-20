@@ -3,18 +3,21 @@
 @section('title', 'Registro de Usuario')
 
 @section('content')
-<div class="max-w-md mx-auto bg-white shadow-md rounded p-6">
-    <h2 class="text-2xl font-bold mb-4">Registro</h2>
+<div class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg p-8">
 
-    @if(session('success'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4" role="alert">
+    <h2 class="text-2xl font-bold text-center text-green-700 mb-6">Registro de Usuario</h2>
+
+    {{-- Mensaje de éxito --}}
+    @if (session('success'))
+        <div class="mb-4 p-3 bg-green-100 border border-green-400 text-green-800 rounded">
             {{ session('success') }}
         </div>
     @endif
 
+    {{-- Errores de validación --}}
     @if ($errors->any())
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-            <ul class="list-disc list-inside">
+        <div class="mb-4 p-3 bg-red-100 border border-red-400 text-red-800 rounded">
+            <ul class="list-disc pl-4">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -22,32 +25,43 @@
         </div>
     @endif
 
-    <form action="{{ route('usuarios.registrar') }}" method="POST">
+    <form action="{{ route('usuarios.registrar') }}" method="POST" class="space-y-4">
         @csrf
 
-        <div class="mb-4">
-            <label class="block">Nombre</label>
-            <input type="text" name="nombre" class="w-full border rounded p-2" required value="{{ old('nombre') }}">
+        <div>
+            <label for="nombre" class="block font-semibold text-gray-700">Nombre</label>
+            <input type="text" id="nombre" name="nombre"
+                   class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-green-300"
+                   value="{{ old('nombre') }}" required>
         </div>
 
-        <div class="mb-4">
-            <label class="block">Apellido</label>
-            <input type="text" name="apellido" class="w-full border rounded p-2" required value="{{ old('apellido') }}">
+        <div>
+            <label for="apellido" class="block font-semibold text-gray-700">Apellido</label>
+            <input type="text" id="apellido" name="apellido"
+                   class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-green-300"
+                   value="{{ old('apellido') }}" required>
         </div>
 
-        <div class="mb-4">
-            <label class="block">Correo</label>
-            <input type="email" name="email" class="w-full border rounded p-2" required value="{{ old('email') }}">
+        <div>
+            <label for="email" class="block font-semibold text-gray-700">Correo Electrónico</label>
+            <input type="email" id="email" name="email"
+                   class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-green-300"
+                   value="{{ old('email') }}" required>
         </div>
 
-        <div class="mb-4">
-            <label class="block">Contraseña</label>
-            <input type="password" name="password" class="w-full border rounded p-2" required>
+        <div>
+            <label for="password" class="block font-semibold text-gray-700">Contraseña</label>
+            <input type="password" id="password" name="password"
+                   class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-green-300"
+                   required>
         </div>
 
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-            Registrarse
-        </button>
+        <div class="text-center">
+            <button type="submit"
+                    class="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                Registrarse
+            </button>
+        </div>
     </form>
 </div>
 @endsection
